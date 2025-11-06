@@ -2,6 +2,7 @@
 /node_modules
 
 # Environment Variables
+# Crucial for hiding database password and API keys
 .env
 .env.local
 .env.*
@@ -10,10 +11,6 @@
 logs
 *.log
 npm-debug.log*
-
-# Database
-store.db
-*.db
 
 # OS Files
 .DS_Store
