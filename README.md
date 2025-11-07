@@ -108,8 +108,6 @@ VITE_RAZORPAY_KEY_ID="rzp_test_YOUR_PUBLIC_KEY_ID"
 
 ## Key Features
 
-> *(Replace image placeholders with your actual screenshots)*
-
 ### 1. Product Listing & Real-Time Stock
 
 * **Frontend:** Minimalist design with Vibe Commerce palette.
