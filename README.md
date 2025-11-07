@@ -1,5 +1,7 @@
 # Vibe Commerce — Full-Stack E-Commerce Cart
-
+![Vibe Commerce application homepage screenshot](./docs/images/homepage.png)
+![Vibe Commerce application homepage screenshot](./docs/images/cart.png)
+![Vibe Commerce application homepage screenshot](./docs/images/orders.png)
 A **robust, full-stack shopping cart application** designed to demonstrate **scalable, real-world e-commerce architecture**.
 This project implements **advanced security**, **transactional integrity**, and **optimized performance** using modern technologies.
 
