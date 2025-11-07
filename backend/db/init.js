@@ -1,4 +1,7 @@
-const { query } = require('./pool');
+// Add this line at the very top
+require('dotenv').config({ path: '../../.env' }); 
+
+const { query } = require('./pool'); // Import our centralized query function
 
 const createTables = async () => {
   const usersTable = `
@@ -10,17 +13,17 @@ const createTables = async () => {
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `;
+
   const productsTable = `
     CREATE TABLE IF NOT EXISTS products (
       id SERIAL PRIMARY KEY,
-      name VARCHAR(255) UNIQUE NOT NULL, -- Added UNIQUE
+      name VARCHAR(255) UNIQUE NOT NULL,
       price NUMERIC(10, 2) NOT NULL,
       image_url TEXT,
-      stock INTEGER NOT NULL DEFAULT 0 -- Added stock
+      stock INTEGER NOT NULL DEFAULT 0
     );
   `;
 
-  // ... (cartItemsTable is the same) ...
   const cartItemsTable = `
     CREATE TABLE IF NOT EXISTS cart_items (
       id SERIAL PRIMARY KEY,
@@ -31,7 +34,7 @@ const createTables = async () => {
       UNIQUE(user_id, product_id)
     );
   `;
-  // We now insert the stock level
+
   const seedProducts = `
     INSERT INTO products (name, price, image_url, stock) VALUES
     ('Minimalist Tee', 25.00, 'https://example.com/image1.jpg', 25),
@@ -39,7 +42,7 @@ const createTables = async () => {
     ('Classic Jeans', 75.00, 'https://example.com/image3.jpg', 25),
     ('Canvas Sneakers', 45.00, 'https://example.com/image4.jpg', 25),
     ('Leather Wallet', 30.00, 'https://example.com/image5.jpg', 25)
-    ON CONFLICT (name) DO NOTHING; -- Prevents duplicate products on re-run
+    ON CONFLICT (name) DO NOTHING;
   `;
 
   try {
@@ -53,9 +56,8 @@ const createTables = async () => {
     await query(seedProducts);
     console.log('Products seeded successfully!');
   } catch (err) {
-    console.error('Error initializing database:', err.stack);
+    console.error('Error initializing database:', err); // Log the full error
   }
 };
 
-// Run the initialization
 createTables();

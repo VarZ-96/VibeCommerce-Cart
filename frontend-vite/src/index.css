@@ -1,0 +1,18 @@
+/* /frontend-vite/src/index.css */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Your global styles */
+  background-color: #E5E9C5; /* background-beige */
+  color: #333; /* A default dark text color */
+}
+
+/* This class will be used in App.jsx */
+.main-content {
+  padding-top: 5rem; /* Space for the fixed navbar */
+}

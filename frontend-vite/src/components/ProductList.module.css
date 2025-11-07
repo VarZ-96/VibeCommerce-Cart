@@ -1,0 +1,20 @@
+.grid {
+  display: grid;
+  /* Responsive grid */
+  grid-template-columns: repeat(1, 1fr); /* 1 column on mobile */
+  gap: 1.5rem;
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  }
+}
+
+/* Large screens (desktops) */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  }
+}

@@ -15,3 +15,15 @@ npm-debug.log*
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Database
+DATABASE_URL="postgresql://neondb_owner:npg_2sRFvqAzyn3S@ep-flat-grass-ahqct6b9-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+
+# Google OAuth
+GOOGLE_CLIENT_ID="YOUR_GOOGLE_CLIENT_ID"
+GOOGLE_CLIENT_SECRET="YOUR_GOOGLE_CLIENT_SECRET"
+CALLBACK_URL="http://localhost:3001/api/auth/google/callback"
+
+# JWT
+JWT_SECRET="suqaniqanqisapuqanqisapuqanqi"
+CLIENT_URL="http://localhost:3000" # Your React app's URL

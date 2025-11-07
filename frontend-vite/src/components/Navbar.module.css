@@ -1,0 +1,101 @@
+.navbar {
+  background-color: rgba(1, 107, 97, 0.7); 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(158, 207, 212, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #E5E9C5;
+  text-decoration: none;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: #9ECFD4;
+  color: #016B61;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #E5E9C5;
+}
+
+.cartIcon {
+  color: #E5E9C5;
+  width: 24px;
+  height: 24px;
+  transition: color 0.3s ease;
+}
+
+.cartIcon:hover {
+  color: #9ECFD4;
+}
+.cartLink {
+  position: relative;
+  display: block;
+  padding: 0.25rem;
+}
+
+.cartIcon {
+  color: #E5E9C5;
+  width: 24px;
+  height: 24px;
+  transition: color 0.3s ease;
+}
+
+.cartIcon:hover {
+  color: #9ECFD4;
+}
+
+.cartCount {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #D9534F;
+  color: white;
+  border-radius: 50%;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid #E5E9C5;
+}
+.navLink {
+  color: #E5E9C5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #9ECFD4;
+}

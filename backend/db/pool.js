@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
-require('dotenv').config({ path: '../.env' }); // Adjust path if .env is in root
+// Path from /backend/db -> /backend -> /VibeCommerce-Cart (root)
+require('dotenv').config({ path: '../../.env' }); 
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
