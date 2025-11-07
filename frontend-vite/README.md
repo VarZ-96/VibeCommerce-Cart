@@ -1,105 +1,87 @@
-Vibe Commerce - Full-Stack E-Commerce Cart
+# 🛒 Vibe Commerce — Full-Stack E-Commerce Cart
 
-A robust, full-stack shopping cart application designed to demonstrate scalable, real-world e-commerce architecture. This project implements advanced security, transactional integrity, and optimized performance using modern technologies.
+A **robust, full-stack shopping cart application** designed to demonstrate **scalable, real-world e-commerce architecture**.
+This project implements **advanced security**, **transactional integrity**, and **optimized performance** using modern technologies.
 
-Project Status: Feature Complete (MVP)
+> **Project Status:** 🟢 Feature Complete (MVP)
 
-🏛️ Architecture & Low-Level Design (LLD)
+---
 
-This application was developed using a microservice-inspired monorepo structure, separating the presentation layer from the business logic and leveraging key architectural patterns for scalability:
+## 🏛️ Architecture & Low-Level Design (LLD)
 
-Layer
+This application follows a **microservice-inspired monorepo** structure — separating the presentation layer from business logic — and leverages key architectural patterns for scalability and maintainability.
 
-Technology
+| Layer              | Technology            | Key LLD Concepts                                                                                                     |
+| ------------------ | --------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Frontend**       | React (Vite)          | Context API for global state, CSS Modules for scoped styling, Glassmorphism UI, framer-motion for scroll animations. |
+| **Authentication** | Node.js (Passport.js) | OAuth 2.0 (Sign in with Google), JWT for stateless session management.                                               |
+| **Backend**        | Node.js (Express)     | RESTful API design, Middleware protection, clean modular routes.                                                     |
+| **Database**       | PostgreSQL (NeonDB)   | Connection pooling for concurrency, Transactional Integrity (BEGIN/COMMIT/ROLLBACK) for safe stock updates.          |
+| **Payments**       | Razorpay              | Server-to-server signature verification for fraud prevention, stock reduction after successful payment.              |
+| **Optimization**   | In-Memory Caching     | Cache invalidation strategy (`clearProductCache`) ensures real-time stock consistency.                               |
 
-Key LLD Concepts Implemented
+---
 
-Frontend
+## 📦 Project Structure
 
-React (Vite)
-
-Context API for global state, CSS Modules for scoped styling, Glassmorphism UI, framer-motion for scroll animations.
-
-Authentication
-
-Node.js (Passport.js)
-
-OAuth 2.0 (Sign in with Google) for identity, JWT (JSON Web Tokens) for stateless session management.
-
-Backend
-
-Node.js (Express)
-
-RESTful API design, Middleware for protection.
-
-Database
-
-PostgreSQL (NeonDB)
-
-Connection Pooling for high concurrency, Transactional Integrity (BEGIN/COMMIT/ROLLBACK) for stock safety.
-
-Payments
-
-Razorpay
-
-Server-to-Server Signature Verification for fraud prevention, Stock Reduction upon Payment.
-
-Optimization
-
-In-Memory Caching
-
-Cache invalidation strategy (clearProductCache function) used on successful payment to ensure immediate stock updates without unnecessary DB reads.
-
-📦 Project Structure
-
+```
 /VibeCommerce-Cart/
 ├── /backend/
 │   ├── config/             # Passport.js setup
-│   ├── db/                 # PostgreSQL Pool connection
-│   ├── middleware/         # JWT Auth middleware
-│   ├── routes/             # API Endpoints (cart, products, payment)
-│   └── server.js           # Express main file
-├── /frontend-vite/         # (Frontend code)
+│   ├── db/                 # PostgreSQL pool connection
+│   ├── middleware/         # JWT auth middleware
+│   ├── routes/             # API endpoints (cart, products, payment)
+│   └── server.js           # Express entry point
+├── /frontend-vite/
 │   ├── src/
-│   │   ├── api.js          # Centralized Axios with JWT interceptor
-│   │   ├── components/     # UI components (Navbar, ProductCard)
+│   │   ├── api.js          # Centralized Axios instance with JWT interceptor
+│   │   ├── components/     # Reusable UI (Navbar, ProductCard, etc.)
 │   │   ├── context/        # Auth & Cart state management
-│   │   └── pages/          # Page components (Home, Cart, Orders)
-│   └── index.html          # Entry point with Razorpay script
+│   │   └── pages/          # Views (Home, Cart, Orders)
+│   └── index.html          # Entry point (includes Razorpay script)
 └── README.md
+```
 
+---
 
-⚙️ Setup and Installation
+## ⚙️ Setup & Installation
 
-Prerequisites
+### 🧩 Prerequisites
 
-Node.js (LTS recommended) & npm.
+* Node.js (LTS recommended) & npm
+* PostgreSQL database (e.g., NeonDB)
+* Google OAuth 2.0 Client ID & Secret
+* Razorpay Key ID & Secret (Test Mode)
 
-A PostgreSQL database (e.g., NeonDB).
+---
 
-A Google OAuth 2.0 Client ID and Secret.
+### **Step 1: Database Initialization**
 
-Razorpay Key ID and Secret (Test Mode).
+1. Create a new database (e.g., `vibe_commerce`) on **NeonDB**.
+2. Run your schema manually in the NeonDB SQL Editor to create and seed:
 
-Step 1: Database Initialization
+   * `users`
+   * `products`
+   * `cart_items`
+   * `orders`
+   * `order_items`
 
-Create your database (e.g., vibe_commerce) on NeonDB.
+> This approach bypasses local pathing issues during first-time setup.
 
-Run the schema script manually in your NeonDB SQL Editor to create the tables (users, products, cart_items, orders, order_items) and seed initial products. (This bypasses local Node.js pathing issues for initial setup).
+---
 
-Step
+### **Step 2: Configure Environment Variables**
 
-2: Configure Environment Variables
+Create a `.env` file in the root directory (`/VibeCommerce-Cart/`):
 
-Create a single file named .env in the root directory (/VibeCommerce-Cart/) with the following variables:
-
+```env
 # --- DATABASE ---
 DATABASE_URL="postgresql://YOUR_NEONDB_CONNECTION_STRING_HERE"
 
-# --- BACKEND KEYS (Server-Side) ---
-JWT_SECRET="a_very_strong_and_long_random_secret_key" 
+# --- BACKEND KEYS ---
+JWT_SECRET="a_very_strong_and_long_random_secret_key"
 
-# Razorpay Secret Key is used for Signature Verification (Server-Side Security)
+# Razorpay Secret Keys (server-side verification)
 RAZORPAY_KEY_ID="rzp_test_XXXXXXXXXXXXXX"
 RAZORPAY_KEY_SECRET="XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
@@ -109,74 +91,90 @@ GOOGLE_CLIENT_SECRET="YOUR_GOOGLE_CLIENT_SECRET"
 CALLBACK_URL="http://localhost:3001/api/auth/google/callback"
 
 # --- CLIENT (Frontend) ---
-CLIENT_URL="http://localhost:5173" # Must match your Vite port (e.g., 5173)
-
-# Razorpay Public Key is used to launch the modal (Client-Side)
+CLIENT_URL="http://localhost:5173"
 VITE_RAZORPAY_KEY_ID="rzp_test_YOUR_PUBLIC_KEY_ID"
+```
 
+---
 
-Step 3: Run the Application
+### **Step 3: Run the Application**
 
-Terminal
+| Terminal    | Path             | Command                       | Description                               |
+| ----------- | ---------------- | ----------------------------- | ----------------------------------------- |
+| 🧠 Backend  | `/backend`       | `npm install` → `npm run dev` | Starts Express API server on port `3001`. |
+| 💻 Frontend | `/frontend-vite` | `npm install` → `npm run dev` | Starts React app on port `5173`.          |
 
-Path
+---
 
-Command
+## 📸 Key Features
 
-Description
+> *(Replace image placeholders with your actual screenshots)*
 
-Terminal 1 (Backend)
+### 🛍️ 1. Product Listing & Real-Time Stock
 
-cd backend
+* **Frontend:** Minimalist design with Vibe Commerce palette.
+* **Backend:** Dynamic "Only X left!" alerts when stock < 10.
 
-npm install then npm run dev
+### 🛒 2. Scalable Cart Management
 
-Starts the Express API server (Port 3001).
+* **Endpoints:**
 
-Terminal 2 (Frontend)
+  * `POST /api/cart` → Add item or increase quantity.
+  * `POST /api/cart/decrease` → Reduce quantity or remove item.
+* **Integrity:** Quantity logic ensures no orphaned rows in `cart_items`.
 
-cd frontend-vite
+### 💳 3. Secure Checkout & Order History
 
-npm install then npm run dev
+* **Transactional Logic:**
 
-Starts the React app (Port 5173, opens in browser).
+  1. Create permanent `order` record.
+  2. Store purchased items in `order_items`.
+  3. Reduce stock in `products`.
+  4. Clear product cache to sync UI instantly.
 
-📸 Key Features & Screenshots
+---
 
-(NOTE: Replace these image placeholders with actual screenshots of your running application)
+## 🔑 Authentication Flow
 
-1. Product Listing & Real-time Stock
+The app employs a **hybrid authentication system** combining OAuth 2.0 and JWT:
 
-View: Products displayed with minimalist design (Vibe Commerce color palette).
+1. **Delegated Identity (OAuth 2.0):**
+   “Sign in with Google” triggers Passport.js, leveraging Google’s secure identity services.
+2. **JWT Tokenization:**
+   Backend issues a signed JWT containing the user ID — sent to the client and stored locally.
+3. **Protected Routes:**
+   Every API request (e.g., `/api/cart`, `/api/orders`) includes this JWT in the `Authorization` header.
+4. **Scalability:**
+   Stateless sessions eliminate server lookups, enabling seamless horizontal scaling.
 
-LLD Detail: The system dynamically shows a "Only X left!" warning when product stock falls below 10, demonstrating integrated inventory management.
+---
 
-2. Scalable Cart Management & Quantity Control
+## 🚀 Future Enhancements
 
-View: The cart page features clear quantity controls.
+* Add product search & filtering
+* Implement WebSocket-based stock sync
+* Introduce Admin Dashboard (CRUD for products)
+* Support multiple payment gateways (Stripe, PayPal)
 
-LLD Detail: The POST /api/cart endpoint handles both adding new items and increasing quantity. The new POST /api/cart/decrease endpoint allows for single-unit removal, only deleting the item row when quantity reaches zero, ensuring data integrity.
+---
 
-3. Secure Checkout and Order History
+## 🧠 Tech Stack Summary
 
-View: The application features a persistent "My Orders" page.
+| Category   | Technology                               |
+| ---------- | ---------------------------------------- |
+| Frontend   | React (Vite), Context API, Framer Motion |
+| Backend    | Node.js, Express, Passport.js            |
+| Database   | PostgreSQL (NeonDB)                      |
+| Payment    | Razorpay                                 |
+| Auth       | Google OAuth 2.0 + JWT                   |
+| Deployment | Vercel / Render (suggested)              |
 
-LLD Detail: This feature relies on PostgreSQL Transactions. Upon payment verification, the system executes an atomic operation:
+---
 
-Records the permanent order in the orders table.
+## 💬 Author
 
-Records the product "transcript" (price at time of purchase) in order_items.
+**Vibe Commerce** — A demonstration of **modern, scalable full-stack architecture** for e-commerce.
+Built with ❤️ by Goated Bot.
 
-Decrements products.stock.
+---
 
-Clears the In-Memory Cache for products, forcing the homepage to display the correct, up-to-date stock immediately.
-
-🔑 Authentication Flow Explained
-
-The application utilizes a secure, hybrid authentication model:
-
-Delegated Identity (OAuth 2.0): The user clicks "Sign in with Google," delegating the identity verification to Google's highly secure infrastructure (Passport.js handles this on the backend).
-
-Stateless Session (JWT): After verification, the backend generates a signed JSON Web Token (JWT) containing the user's ID. This token is sent to the frontend and stored.
-
-Protected Access: For every subsequent request (e.g., adding to cart, viewing orders), the frontend sends the JWT in the Authorization header. The custom authMiddleware verifies the token's signature, confirming the user's identity without requiring any server-side session lookup, which ensures high API scalability.
