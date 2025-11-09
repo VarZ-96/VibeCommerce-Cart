@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 1. Create a central Axios instance
 const api = axios.create({
-  baseURL: 'http://localhost:3001/api', // Your backend's URL
+  baseURL: 'https://vibecommerce-cart-backend.onrender.com/api', // Your backend's URL
 });
 
 // 2. Add a Request Interceptor (The "Gatekeeper")
