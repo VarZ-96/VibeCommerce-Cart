@@ -1,4 +1,13 @@
 {
+  "builds": [
+    {
+      "src": "frontend-vite/index.html",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "frontend-vite/dist" 
+      }
+    }
+  ],
   "rewrites": [
     { 
       "source": "/(.*)", 
