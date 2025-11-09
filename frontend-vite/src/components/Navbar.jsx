@@ -4,7 +4,7 @@ import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
-const GOOGLE_LOGIN_URL = 'http://localhost:3001/api/auth/google';
+const GOOGLE_LOGIN_URL = `${import.meta.env.VITE_API_URL}/api/auth/google`;
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -23,11 +23,9 @@ const Navbar = () => {
         <div className={styles.navLinks}>
           {isAuthenticated ? (
             <>
-              {/* === NEW LINK === */}
               <Link to="/orders" className={styles.navLink}>
                 My Orders
               </Link>
-              {/* === END NEW LINK === */}
 
               <Link to="/cart" className={styles.cartLink}>
                 <svg className={styles.cartIcon} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
